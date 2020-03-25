@@ -2,6 +2,8 @@ package sort;
 
 import utils.Utils;
 
+import java.util.Arrays;
+
 /**
  * @author Administrator
  * @descript 快速排序
@@ -13,18 +15,19 @@ public class QuickSort {
         if (left >= right) {
             return;
         }
-        int i = left, j = right + 1;
+        // +1是因为22行寻找较大元素的时候，先自减
+        int l = left, r = right + 1;
         //采用左边元素作为基准
         int v = nums[left];
         while (true) {
-            while (nums[++i] < v) if (i == right) break;
-            while (v < nums[--j]) if (j == left) break;
-            if (i >= j) break;
-            Utils.exchange(nums, i, j);
+            while (nums[++l] < v) if (l == right) break;
+            while (v < nums[--r]) if (r == left) break;
+            if (l >= r) break;
+            Utils.exchange(nums, l, r);
         }
-        Utils.exchange(nums, left, j);
-        sort(nums, left, j - 1);
-        sort(nums, j + 1, right);
+        Utils.exchange(nums, left, r);
+        sort(nums, left, r - 1);
+        sort(nums, r + 1, right);
     }
 
     public void sort(int[] nums) {
@@ -35,6 +38,6 @@ public class QuickSort {
     }
 
     public static void main(String[] args) {
-        new QuickSort().sort(Utils.getRandomNums(10));
+        new QuickSort().sort(new int[]{4, 4, 4});
     }
 }

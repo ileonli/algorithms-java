@@ -42,16 +42,25 @@ public class SingleLinkedList<Value extends Comparable<Value>> {
     }
 
     public void reverse() {
-        Node temp;
-        Node node = new Node(null);
-        Node cur = head.next;
-        while (cur != null) {
+//        Node temp;
+//        Node node = new Node(null);
+//        Node cur = head.next;
+//        while (cur != null) {
+//            temp = cur.next;
+//            cur.next = node.next;
+//            node.next = cur;
+//            cur = temp;
+//        }
+//        head.next = node.next;
+
+        Node temp, cur;
+        cur = head.next;
+        while (cur.next != null) {
             temp = cur.next;
-            cur.next = node.next;
-            node.next = cur;
-            cur = temp;
+            cur.next = temp.next;
+            temp.next = head.next;
+            head.next = temp;
         }
-        head.next = node.next;
     }
 
     public void reverseList() {
