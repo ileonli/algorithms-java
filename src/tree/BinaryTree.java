@@ -96,10 +96,24 @@ public class BinaryTree<K extends Comparable<K>, V> {
                 }
                 n = n.right;
             } else {
+
+                if (n == root) {
+                    newNode.left = root.left;
+                    newNode.right = root.right;
+                    root = newNode;
+                    return;
+                }
+
                 newNode.left = n.left;
                 newNode.right = n.right;
                 newNode.parent = n.parent;
-                n = newNode;
+
+                if (n.parent.left == n) {
+                    n.parent.left = newNode;
+                } else {
+                    n.parent.right = newNode;
+                }
+
                 break;
             }
         }
